@@ -13,6 +13,12 @@
     html { scroll-behavior: smooth; }
     body { font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
 
+    @keyframes gentle-float {
+      0%, 100% { transform: translateY(0px); }
+      50%       { transform: translateY(-7px); }
+    }
+    .float-card { animation: gentle-float 4s ease-in-out infinite; }
+
     .hero-bg {
       background-image:
         radial-gradient(ellipse 900px 452px at 80% -10%, rgba(79,70,229,0.06) 0%, transparent 60%),
@@ -101,7 +107,7 @@
         <h1 class="font-extrabold text-[#111827] mb-[22px]" style="font-size:clamp(36px,5vw,60px);line-height:1.05;letter-spacing:-1.2px">
           One software to<br>run your whole<br>business.
         </h1>
-        <p class="text-[#4b5563] leading-[1.58] mb-[55px]" style="font-size:clamp(16px,1.4vw,19px)">
+        <p class="text-[#4b5563] leading-[1.58] mb-[22px]" style="font-size:clamp(16px,1.4vw,19px)">
           A new tool, made in Mauritius, for Mauritian shops,<br class="hidden xl:block">
           restaurants and salons. Sales, stock, staff and accounts,<br class="hidden xl:block">
           all in one place.
@@ -120,7 +126,7 @@
 
       <!-- Right: tablet mockup -->
       <div class="flex-1 min-w-0 flex items-center justify-center lg:justify-end mt-12 lg:mt-0">
-        <div class="relative w-full max-w-[560px]">
+        <div class="relative w-full max-w-[644px]">
           <!-- Tablet frame -->
           <div class="rounded-[28px] bg-[#18181b] p-[10px] shadow-[0_32px_80px_-16px_rgba(0,0,0,0.36),0_0_0_1px_rgba(255,255,255,0.06)]">
             <div class="rounded-[20px] overflow-hidden border border-[rgba(255,255,255,0.08)]">
@@ -128,7 +134,7 @@
             </div>
           </div>
           <!-- Floating sales card -->
-          <div class="absolute -bottom-4 -left-4 bg-white rounded-[14px] px-4 py-3.5 shadow-[0_8px_24px_rgba(0,0,0,0.12),0_1px_3px_rgba(0,0,0,0.08)] border border-[#f3f4f6]">
+          <div class="float-card absolute -bottom-4 -left-4 bg-white rounded-[14px] px-4 py-3.5 shadow-[0_8px_24px_rgba(0,0,0,0.12),0_1px_3px_rgba(0,0,0,0.08)] border border-[#f3f4f6]">
             <div class="flex items-center gap-1.5 mb-1">
               <span class="w-[7px] h-[7px] rounded-full bg-[#22c55e] flex-shrink-0"></span>
               <span class="text-[11px] font-semibold text-[#6b7280] uppercase tracking-[0.4px]">Today's sales</span>
