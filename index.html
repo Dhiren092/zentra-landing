@@ -90,7 +90,7 @@
 <!-- ══════════════ HERO ══════════════ -->
 <section class="hero-bg pt-[73px] overflow-hidden">
   <div class="max-w-[1440px] mx-auto page-x">
-    <div class="flex flex-col lg:flex-row items-start gap-6 xl:gap-8 pt-16 sm:pt-20 lg:pt-[135px] pb-16 lg:pb-24">
+    <div class="flex flex-col lg:flex-row items-center gap-10 xl:gap-16 pt-16 sm:pt-20 lg:pt-[100px] pb-16 lg:pb-24">
 
       <!-- Left content -->
       <div class="w-full lg:max-w-[534px] flex-shrink-0 relative z-10">
@@ -118,18 +118,25 @@
         <p class="text-[13px] text-[#6b7280]">Free to try. No credit card. Set up in under a week.</p>
       </div>
 
-      <!-- Right: stacked screenshots -->
-      <div class="hidden lg:block relative flex-1 min-w-0 self-start" style="margin-top:-64px;height:480px">
-        <div class="absolute right-0 top-20 w-[62%] h-[88%] rounded-[10.836px] border border-[#e5e7eb] bg-[#f9fafb] card-shadow" style="transform:rotate(2deg);transform-origin:top left"></div>
-        <div class="absolute left-0 top-24 w-[92%] h-[89%] rounded-[10.836px] border border-[#e5e7eb] overflow-hidden card-shadow" style="transform:rotate(-1deg);transform-origin:top left">
-          <img src="https://www.figma.com/api/mcp/asset/a5f8f885-b0bb-480f-9777-5ab720244b40" alt="Zentra order screen" class="w-full h-full object-cover object-top"/>
+      <!-- Right: tablet mockup -->
+      <div class="flex-1 min-w-0 flex items-center justify-center lg:justify-end mt-12 lg:mt-0">
+        <div class="relative w-full max-w-[560px]">
+          <!-- Tablet frame -->
+          <div class="rounded-[28px] bg-[#18181b] p-[10px] shadow-[0_32px_80px_-16px_rgba(0,0,0,0.36),0_0_0_1px_rgba(255,255,255,0.06)]">
+            <div class="rounded-[20px] overflow-hidden border border-[rgba(255,255,255,0.08)]">
+              <img src="./zentra-ui.jpg" alt="Zentra POS dashboard" class="w-full block"/>
+            </div>
+          </div>
+          <!-- Floating sales card -->
+          <div class="absolute -bottom-4 -left-4 bg-white rounded-[14px] px-4 py-3.5 shadow-[0_8px_24px_rgba(0,0,0,0.12),0_1px_3px_rgba(0,0,0,0.08)] border border-[#f3f4f6]">
+            <div class="flex items-center gap-1.5 mb-1">
+              <span class="w-[7px] h-[7px] rounded-full bg-[#22c55e] flex-shrink-0"></span>
+              <span class="text-[11px] font-semibold text-[#6b7280] uppercase tracking-[0.4px]">Today's sales</span>
+            </div>
+            <p class="text-[22px] font-bold text-[#111827] leading-none mb-1">Rs 18,420</p>
+            <p class="text-[12px] font-semibold text-[#22c55e]">+12% vs yesterday</p>
+          </div>
         </div>
-        <div class="absolute left-0 top-0 w-[92%] h-[94%] rounded-[10.836px] border border-[#e5e7eb] overflow-hidden card-shadow" style="transform:rotate(-3deg);transform-origin:top left;opacity:.92">
-          <img src="https://www.figma.com/api/mcp/asset/0748356a-a534-43c2-810c-5c5c7cd7f2fa" alt="Zentra checkout screen" class="w-full h-full object-cover object-top"/>
-        </div>
-      </div>
-      <div class="lg:hidden w-full mt-10 rounded-[10px] border border-[#e5e7eb] overflow-hidden card-shadow">
-        <img src="https://www.figma.com/api/mcp/asset/0748356a-a534-43c2-810c-5c5c7cd7f2fa" alt="Zentra checkout screen" class="w-full object-cover"/>
       </div>
     </div>
   </div>
