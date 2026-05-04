@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zentra — One software to run your whole business</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+
+    .hero-bg {
+      background-image:
+        radial-gradient(ellipse 900px 452px at 80% -10%, rgba(79,70,229,0.06) 0%, transparent 60%),
+        radial-gradient(ellipse 700px 362px at 10% 0%,   rgba(124,58,237,0.04) 0%, transparent 60%);
+    }
+    .card-shadow {
+      box-shadow: 0 21.672px 43.343px -14.448px rgba(17,24,39,.22), 0 3.612px 10.836px 0 rgba(0,0,0,.05);
+    }
+    .section-shadow {
+      box-shadow: 0 30px 60px -24px rgba(17,24,39,.18), 0 4px 12px 0 rgba(0,0,0,.05);
+    }
+    .ui-shadow { box-shadow: 0 2px 8px 0 rgba(0,0,0,.05); }
+    .page-x { padding-left: clamp(20px,8.33vw,120px); padding-right: clamp(20px,8.33vw,120px); }
+
+    /* Badge variants */
+    .badge-blue  { background:#d6ebff; border:1px solid rgba(0,64,128,.08); color:#004080; }
+    .badge-red   { background:#fef3f2; border:1px solid rgba(180,35,24,.08); color:#b42318; }
+    .badge-dot-indigo { background:#4f46e5; }
+    .badge-dot-red    { background:#ef4444; }
+
+    /* Tab active state */
+    .tab-btn.active { background:#fff; border-color:#e5e7eb; color:#111827; box-shadow:0 1px 3px rgba(0,0,0,.08); }
+    .tab-btn { color:#6b7280; border:1px solid transparent; }
+    .tab-panel { display:none; }
+    .tab-panel.active { display:block; }
+
+    /* FAQ accordion */
+    .faq-answer { max-height:0; overflow:hidden; transition:max-height .3s ease; }
+    .faq-item.open .faq-answer { max-height:300px; }
+    .faq-item.open .faq-icon { transform:rotate(45deg); }
+    .faq-icon { transition:transform .2s ease; }
+
+    /* Pricing highlight */
+    .plan-featured { border-color:#4f46e5; box-shadow:0 0 0 1px #4f46e5; }
+
+    /* check icon */
+    .check { color:#4f46e5; }
+  </style>
+</head>
+<body class="bg-white text-[#111827]">
+
+<!-- ══════════════ NAVBAR ══════════════ -->
+<header class="fixed top-0 left-0 right-0 z-50 h-[73px] bg-white/95 backdrop-blur-sm border-b border-[#e5e7eb]">
+  <div class="max-w-[1440px] mx-auto h-full page-x flex items-center justify-between gap-6">
+    <a href="#" class="flex-shrink-0">
+      <svg width="109" height="26" viewBox="0 0 109 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Zentra">
+        <g clip-path="url(#logo-nav)">
+          <path d="M24.2929 1.06665H1.27858C0.572438 1.06665 0 1.63909 0 2.34523V6.18096C0 6.88709 0.572438 7.45953 1.27858 7.45953H24.2929C24.9991 7.45953 25.5715 6.88709 25.5715 6.18096V2.34523C25.5715 1.63909 24.9991 1.06665 24.2929 1.06665Z" fill="#4F46E5"/>
+          <path d="M30.6858 9.59045H7.67146C6.96532 9.59045 6.39288 10.1629 6.39288 10.869V14.7048C6.39288 15.4109 6.96532 15.9833 7.67146 15.9833H30.6858C31.392 15.9833 31.9644 15.4109 31.9644 14.7048V10.869C31.9644 10.1629 31.392 9.59045 30.6858 9.59045Z" fill="#7C3AED" fill-opacity="0.85"/>
+          <path d="M24.2929 18.114H1.27858C0.572438 18.114 0 18.6865 0 19.3926V23.2283C0 23.9345 0.572438 24.5069 1.27858 24.5069H24.2929C24.9991 24.5069 25.5715 23.9345 25.5715 23.2283V19.3926C25.5715 18.6865 24.9991 18.114 24.2929 18.114Z" fill="#4F46E5"/>
+        </g>
+        <path d="M42.9707 21V18.4434L50.0498 9.74219C50.3148 9.41992 50.5833 9.10124 50.8555 8.78613C51.1276 8.46387 51.4033 8.14518 51.6826 7.83008H43.207V4.99414H55.7002V7.55078L48.7393 16.166C48.4671 16.4954 48.1878 16.8285 47.9014 17.165C47.6221 17.5016 47.3356 17.8346 47.042 18.1641H55.7754V21H42.9707ZM62.2104 21.2578C61.0646 21.2578 60.0655 21.0036 59.2133 20.4951C58.3683 19.9867 57.7094 19.2884 57.2368 18.4004C56.7713 17.5052 56.5385 16.4847 56.5385 15.3389C56.5385 14.1859 56.7748 13.1618 57.2475 12.2666C57.7273 11.3714 58.3862 10.6696 59.2241 10.1611C60.062 9.65267 61.0216 9.39844 62.103 9.39844C63.2202 9.39844 64.1941 9.64909 65.0248 10.1504C65.8627 10.6445 66.5144 11.3356 66.9799 12.2236C67.4526 13.1045 67.6889 14.1214 67.6889 15.2744V16.123H59.6215C59.6502 16.9609 59.8972 17.6305 60.3627 18.1318C60.8282 18.6331 61.4763 18.8838 62.3071 18.8838C62.923 18.8838 63.435 18.7513 63.8432 18.4863C64.2586 18.2214 64.5379 17.8704 64.6811 17.4336H67.5707C67.4347 18.1855 67.116 18.848 66.6147 19.4209C66.1134 19.9938 65.4832 20.445 64.7241 20.7744C63.9649 21.0967 63.1271 21.2578 62.2104 21.2578ZM59.643 14.1035H64.7026C64.6238 13.3945 64.3588 12.8359 63.9077 12.4277C63.4636 12.0124 62.8836 11.8047 62.1674 11.8047C61.4584 11.8047 60.8819 12.0124 60.4379 12.4277C59.9939 12.8359 59.7289 13.3945 59.643 14.1035ZM72.1151 14.6943V21H68.9462V9.65625H72.0614V11.4395C72.4481 10.7949 72.9315 10.2972 73.5116 9.94629C74.0917 9.59538 74.7899 9.41992 75.6063 9.41992C76.8095 9.41992 77.7727 9.81022 78.496 10.5908C79.2193 11.3643 79.5809 12.4671 79.5809 13.8994V21H76.4227V14.4795C76.4227 13.7204 76.2401 13.1439 75.8749 12.75C75.5096 12.349 74.9976 12.1484 74.3388 12.1484C73.6871 12.1484 73.1535 12.3525 72.7382 12.7607C72.3228 13.1689 72.1151 13.8135 72.1151 14.6943ZM87.9173 9.65625V12.1377H85.597V17.498C85.597 17.8848 85.6722 18.1533 85.8226 18.3037C85.9801 18.4469 86.2738 18.5186 86.7034 18.5186H87.9173V21H86.0696C84.8236 21 83.9033 20.7565 83.3089 20.2695C82.7217 19.7826 82.428 19.0234 82.428 17.9922V12.1377H80.473V9.65625H82.428V6.5625H85.597V9.65625H87.9173ZM89.0779 21V9.65625H92.1287V11.5898H92.1609C92.3686 10.9095 92.6944 10.4046 93.1384 10.0752C93.5824 9.74577 94.1804 9.58105 94.9324 9.58105C95.1186 9.58105 95.2869 9.58464 95.4373 9.5918C95.5948 9.59896 95.738 9.60254 95.867 9.60254V12.2988C95.7524 12.2917 95.5626 12.2809 95.2976 12.2666C95.0326 12.2523 94.7677 12.2451 94.5027 12.2451C93.851 12.2451 93.3103 12.4671 92.8806 12.9111C92.4581 13.3551 92.2468 14.0033 92.2468 14.8555V21H89.0779ZM100.143 21.1934C99.0113 21.1934 98.0767 20.9105 97.3391 20.3447C96.6086 19.779 96.2434 18.9303 96.2434 17.7988C96.2434 16.9466 96.4475 16.2806 96.8557 15.8008C97.2639 15.3138 97.8046 14.9593 98.4777 14.7373C99.1509 14.5153 99.8814 14.3685 100.669 14.2969C101.708 14.1895 102.434 14.082 102.85 13.9746C103.265 13.8672 103.473 13.6309 103.473 13.2656V13.1904C103.473 12.7751 103.308 12.4349 102.979 12.1699C102.649 11.9049 102.195 11.7725 101.614 11.7725C101.027 11.7725 100.551 11.9085 100.186 12.1807C99.8205 12.4528 99.62 12.8073 99.5842 13.2441H96.6086C96.6802 12.0768 97.16 11.1494 98.048 10.4619C98.9361 9.76725 100.157 9.41992 101.711 9.41992C103.265 9.41992 104.468 9.76725 105.321 10.4619C106.173 11.1494 106.599 12.0983 106.599 13.3086V21H103.505V19.3994H103.462C103.161 19.9508 102.75 20.3877 102.227 20.71C101.704 21.0322 101.009 21.1934 100.143 21.1934ZM101.024 18.9912C101.783 18.9912 102.384 18.7907 102.828 18.3896C103.272 17.9814 103.494 17.4694 103.494 16.8535V15.7148C103.315 15.8151 103.018 15.9082 102.603 15.9941C102.187 16.0729 101.725 16.1517 101.217 16.2305C100.673 16.3164 100.211 16.474 99.8312 16.7031C99.4589 16.9251 99.2727 17.2617 99.2727 17.7129C99.2727 18.1139 99.4302 18.429 99.7453 18.6582C100.068 18.8802 100.494 18.9912 101.024 18.9912Z" fill="#111827"/>
+        <defs><clipPath id="logo-nav"><rect width="32.3906" height="25.1875" fill="white" transform="translate(0 0.40625)"/></clipPath></defs>
+      </svg>
+    </a>
+    <nav class="hidden lg:flex items-center gap-7 flex-1 justify-center">
+      <a href="#features" class="text-[14.5px] font-medium text-[#4b5563] hover:text-[#111827] transition-colors">Products</a>
+      <a href="#pricing"  class="text-[14.5px] font-medium text-[#4b5563] hover:text-[#111827] transition-colors">Pricing</a>
+      <a href="#founders" class="text-[14.5px] font-medium text-[#4b5563] hover:text-[#111827] transition-colors">About</a>
+      <a href="#faq"      class="text-[14.5px] font-medium text-[#4b5563] hover:text-[#111827] transition-colors">FAQ</a>
+    </nav>
+    <div class="hidden lg:flex items-center gap-4 flex-shrink-0">
+      <a href="#" class="inline-flex items-center gap-1.5 bg-[#4f46e5] hover:bg-[#4338ca] text-white text-[14.5px] font-semibold h-[40px] px-5 rounded-[8px] transition-colors shadow-[0_1px_1px_rgba(0,0,0,.05)]">
+        Start free trial
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 6.5h9M7 2.5L11 6.5 7 10.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+    <button class="lg:hidden p-2 -mr-2 text-[#6b7280]">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3 5.5h16M3 11h16M3 16.5h16" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</header>
+
+
+<!-- ══════════════ HERO ══════════════ -->
+<section class="hero-bg pt-[73px] overflow-hidden">
+  <div class="max-w-[1440px] mx-auto page-x">
+    <div class="flex flex-col lg:flex-row items-start gap-6 xl:gap-8 pt-16 sm:pt-20 lg:pt-[135px] pb-16 lg:pb-24">
+
+      <!-- Left content -->
+      <div class="w-full lg:max-w-[534px] flex-shrink-0 relative z-10">
+        <div class="inline-flex items-center gap-2 h-[29px] px-3 badge-blue rounded-full mb-8">
+          <span class="w-[6px] h-[6px] badge-dot-indigo rounded-[3px] flex-shrink-0"></span>
+          <span class="text-[12px] font-semibold tracking-[0.24px] whitespace-nowrap">Just launched in Mauritius</span>
+        </div>
+        <h1 class="font-extrabold text-[#111827] mb-[22px]" style="font-size:clamp(36px,5vw,60px);line-height:1.05;letter-spacing:-1.2px">
+          One software to<br>run your whole<br>business.
+        </h1>
+        <p class="text-[#4b5563] leading-[1.58] mb-[55px]" style="font-size:clamp(16px,1.4vw,19px)">
+          A new tool, made in Mauritius, for Mauritian shops,<br class="hidden xl:block">
+          restaurants and salons. Sales, stock, staff and accounts,<br class="hidden xl:block">
+          all in one place.
+        </p>
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mb-5">
+          <a href="#" class="inline-flex items-center justify-center gap-2 bg-[#4f46e5] hover:bg-[#4338ca] text-white text-[16px] font-semibold h-[52px] px-6 rounded-[8px] transition-colors shadow-[0_1px_1px_rgba(0,0,0,.05)] w-full sm:w-auto">
+            Start free trial
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8.5 3.5L13 8l-4.5 4.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="#" class="inline-flex items-center justify-center gap-2 bg-white hover:bg-gray-50 text-[#1f2937] text-[16px] font-semibold h-[52px] px-6 rounded-[8px] border border-[#d1d9e6] hover:border-[#c4cfe0] transition-colors shadow-[0_0.868px_0.868px_rgba(0,0,0,.05)] w-full sm:w-auto">
+            Book a demo
+          </a>
+        </div>
+        <p class="text-[13px] text-[#6b7280]">Free to try. No credit card. Set up in under a week.</p>
+      </div>
+
+      <!-- Right: stacked screenshots -->
+      <div class="hidden lg:block relative flex-1 min-w-0 self-start" style="margin-top:-64px;height:480px">
+        <div class="absolute right-0 top-20 w-[62%] h-[88%] rounded-[10.836px] border border-[#e5e7eb] bg-[#f9fafb] card-shadow" style="transform:rotate(2deg);transform-origin:top left"></div>
+        <div class="absolute left-0 top-24 w-[92%] h-[89%] rounded-[10.836px] border border-[#e5e7eb] overflow-hidden card-shadow" style="transform:rotate(-1deg);transform-origin:top left">
+          <img src="https://www.figma.com/api/mcp/asset/a5f8f885-b0bb-480f-9777-5ab720244b40" alt="Zentra order screen" class="w-full h-full object-cover object-top"/>
+        </div>
+        <div class="absolute left-0 top-0 w-[92%] h-[94%] rounded-[10.836px] border border-[#e5e7eb] overflow-hidden card-shadow" style="transform:rotate(-3deg);transform-origin:top left;opacity:.92">
+          <img src="https://www.figma.com/api/mcp/asset/0748356a-a534-43c2-810c-5c5c7cd7f2fa" alt="Zentra checkout screen" class="w-full h-full object-cover object-top"/>
+        </div>
+      </div>
+      <div class="lg:hidden w-full mt-10 rounded-[10px] border border-[#e5e7eb] overflow-hidden card-shadow">
+        <img src="https://www.figma.com/api/mcp/asset/0748356a-a534-43c2-810c-5c5c7cd7f2fa" alt="Zentra checkout screen" class="w-full object-cover"/>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════ LOGO STRIP ══════════════ -->
+<section class="bg-[#fafafa] border-t border-b border-[#e5e7eb]">
+  <div class="max-w-[1440px] mx-auto page-x py-12">
+    <p class="text-center text-[12px] font-semibold text-[#6b7280] uppercase tracking-[0.96px] mb-7">Trusted by SMEs across Mauritius</p>
+    <div class="flex items-center justify-center flex-wrap gap-x-14 gap-y-4" style="opacity:.85">
+      <span class="text-[16px] font-bold text-[#9ca3af] tracking-[-0.16px]">Saveurs</span>
+      <span class="text-[16px] font-bold text-[#9ca3af] tracking-[-0.16px]">Coastline</span>
+      <span class="text-[16px] font-bold text-[#9ca3af] tracking-[-0.16px]">Fairwind</span>
+      <span class="text-[16px] font-bold text-[#9ca3af] tracking-[-0.16px]">Northgate</span>
+      <span class="text-[16px] font-bold text-[#9ca3af] tracking-[-0.16px]">Lumière</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════ THE DAILY PROBLEM ══════════════ -->
+<section class="py-24 lg:py-32">
+  <div class="max-w-[1440px] mx-auto page-x">
+    <div class="inline-flex items-center gap-2 h-[29px] px-3 badge-red rounded-full mb-8">
+      <span class="w-[6px] h-[6px] badge-dot-red rounded-[3px] flex-shrink-0"></span>
+      <span class="text-[12px] font-semibold tracking-[0.24px]">The daily problem</span>
+    </div>
+    <h2 class="font-bold text-[#111827] mb-6 max-w-[680px]" style="font-size:clamp(28px,3.5vw,44px);line-height:1.1;letter-spacing:-0.88px">
+      Running a business with five different tools is hard.
+    </h2>
+    <p class="text-[#4b5563] text-[19px] leading-[30px] mb-14 max-w-[680px]">
+      You write the same numbers in three places. The month-end takes a full weekend. You spend more time fixing mistakes than running your shop.
+    </p>
+
+    <!-- 3 problem cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+
+      <!-- Card 1: Sales -->
+      <div class="bg-white border border-[#e5e7eb] rounded-[12px] p-7 flex flex-col gap-5">
+        <!-- Decorative skeleton bar chart -->
+        <div class="bg-[#f9fafb] border border-[#f3f4f6] rounded-[8px] h-[78px] px-3 py-3 flex flex-col justify-between overflow-hidden">
+          <div class="h-[6px] w-[55%] bg-[#e5e7eb] rounded-sm"></div>
+          <div class="h-[6px] w-[75%] bg-[#e5e7eb] rounded-sm"></div>
+          <div class="h-[6px] w-[40%] bg-[#e5e7eb] rounded-sm"></div>
+          <div class="h-[6px] w-[60%] bg-[#e5e7eb] rounded-sm"></div>
+          <div class="h-[8px] w-[48%] bg-[#d1d9e6] rounded-sm mt-1"></div>
+        </div>
+        <div>
+          <h3 class="text-[17px] font-semibold text-[#111827] tracking-[-0.17px] mb-2">Sales in one place</h3>
+          <p class="text-[14px] text-[#4b5563] leading-[22px]">A till that prints PDFs. Receipts sent on WhatsApp. Stock counted by hand on Friday night.</p>
+        </div>
+      </div>
+
+      <!-- Card 2: Payroll -->
+      <div class="bg-white border border-[#e5e7eb] rounded-[12px] p-7 flex flex-col gap-5">
+        <!-- Decorative spreadsheet grid -->
+        <div class="bg-[#e5e7eb] border border-[#f3f4f6] rounded-[8px] h-[78px] overflow-hidden grid" style="grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(4,1fr)">
+          <div class="bg-white border-r border-b border-[#f3f4f6]"></div>
+          <div class="bg-white border-r border-b border-[#f3f4f6]"></div>
+          <div class="bg-white border-r border-b border-[#f3f4f6]"></div>
+          <div class="bg-white border-b border-[#f3f4f6]"></div>
+          <div class="bg-white border-r border-b border-[#f3f4f6]"></div>
+          <div class="bg-[#fef3f2] border-r border-b border-[#f3f4f6]"></div>
+          <div class="bg-white border-r border-b border-[#f3f4f6]"></div>
+          <div class="bg-white border-b border-[#f3f4f6]"></div>
+          <div class="bg-white border-r border-b border-[#f3f4f6]"></div>
+          <div class="bg-white border-r border-b border-[#f3f4f6]"></div>
+          <div class="bg-white border-r border-b border-[#f3f4f6]"></div>
+          <div class="bg-[#fff7ed] border-b border-[#f3f4f6]"></div>
+          <div class="bg-white border-r border-[#f3f4f6]"></div>
+          <div class="bg-white border-r border-[#f3f4f6]"></div>
+          <div class="bg-white border-r border-[#f3f4f6]"></div>
+          <div class="bg-white border-[#f3f4f6]"></div>
+        </div>
+        <div>
+          <h3 class="text-[17px] font-semibold text-[#111827] tracking-[-0.17px] mb-2">Payroll in a spreadsheet</h3>
+          <p class="text-[14px] text-[#4b5563] leading-[22px]">Hours copied from a paper book. Formulas that break. NPF and CSG done from memory.</p>
+        </div>
+      </div>
+
+      <!-- Card 3: Stock -->
+      <div class="bg-white border border-[#e5e7eb] rounded-[12px] p-7 flex flex-col gap-5">
+        <!-- Decorative stock bars -->
+        <div class="bg-[#f9fafb] border border-[#f3f4f6] rounded-[8px] h-[78px] px-3 py-3 flex items-end gap-2 overflow-hidden">
+          <div class="flex-1 bg-[#d1d9e6] rounded-t-sm" style="height:60%"></div>
+          <div class="flex-1 bg-[#e5e7eb] rounded-t-sm" style="height:80%"></div>
+          <div class="flex-1 bg-[#fca5a5] rounded-t-sm" style="height:30%"></div>
+          <div class="flex-1 bg-[#e5e7eb] rounded-t-sm" style="height:65%"></div>
+          <div class="flex-1 bg-[#d1d9e6] rounded-t-sm" style="height:50%"></div>
+          <div class="flex-1 bg-[#fca5a5] rounded-t-sm" style="height:20%"></div>
+        </div>
+        <div>
+          <h3 class="text-[17px] font-semibold text-[#111827] tracking-[-0.17px] mb-2">Stock you cannot trust</h3>
+          <p class="text-[14px] text-[#4b5563] leading-[22px]">The number depends on who you ask. Suppliers call you for orders you forgot to send.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════ ONE PLATFORM ══════════════ -->
+<section class="py-24 lg:py-32 bg-[#fafafa]" id="features">
+  <div class="max-w-[1440px] mx-auto page-x">
+    <div class="text-center mb-14">
+      <h2 class="font-bold text-[#111827] mb-6" style="font-size:clamp(28px,3.5vw,44px);line-height:1.1;letter-spacing:-0.88px">
+        One platform. Every part of your business.
+      </h2>
+      <p class="text-[#4b5563] text-[19px] leading-[30px] max-w-[780px] mx-auto">
+        Zentra replaces five disconnected tools with one operating system. Your front counter, your back office, and your accountant see the same numbers, in the same place, at the same time.
+      </p>
+    </div>
+
+    <!-- Hub card -->
+    <div class="bg-white border border-[#e5e7eb] rounded-[20px] section-shadow overflow-hidden">
+      <!-- Subtle gradient background -->
+      <div class="relative" style="background:radial-gradient(ellipse 600px 324px at 50% 0%, rgba(79,70,229,0.06) 0%, transparent 70%)">
+        <div class="px-12 py-14">
+          <!-- Central pill -->
+          <div class="flex justify-center mb-10">
+            <div class="inline-flex items-center gap-2 bg-[#4f46e5] text-white text-[14px] font-bold tracking-[0.14px] h-[41px] px-5 rounded-full shadow-[0_8px_20px_-8px_rgba(79,70,229,0.5)]">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="1" width="4" height="4" rx="0.8" fill="white"/><rect x="6.5" y="1" width="4" height="4" rx="0.8" fill="white" opacity=".7"/><rect x="1" y="6.5" width="4" height="4" rx="0.8" fill="white" opacity=".7"/><rect x="6.5" y="6.5" width="4" height="4" rx="2" fill="white"/></svg>
+              Zentra core
+            </div>
+          </div>
+
+          <!-- 6 module cards -->
+          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+            <!-- POS -->
+            <div class="bg-[#fafafa] border border-[#f3f4f6] rounded-[12px] p-4 flex flex-col items-center gap-3">
+              <div class="w-10 h-10 bg-[#d6ebff] rounded-[10px] flex items-center justify-center flex-shrink-0">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="4" width="14" height="12" rx="2" stroke="#3b82f6" stroke-width="1.5"/><path d="M7 9h6M7 12h4" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </div>
+              <span class="text-[13px] font-semibold text-[#1f2937]">POS</span>
+            </div>
+            <!-- Payroll -->
+            <div class="bg-[#fafafa] border border-[#f3f4f6] rounded-[12px] p-4 flex flex-col items-center gap-3">
+              <div class="w-10 h-10 bg-[#d6ebff] rounded-[10px] flex items-center justify-center">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 3v14M6 7h6a2 2 0 010 4H6m0 3h7" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <span class="text-[13px] font-semibold text-[#1f2937]">Payroll</span>
+            </div>
+            <!-- Attendance -->
+            <div class="bg-[#fafafa] border border-[#f3f4f6] rounded-[12px] p-4 flex flex-col items-center gap-3">
+              <div class="w-10 h-10 bg-[#d6ebff] rounded-[10px] flex items-center justify-center">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="8" r="3" stroke="#3b82f6" stroke-width="1.5"/><path d="M4 17c0-3.314 2.686-5 6-5s6 1.686 6 5" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </div>
+              <span class="text-[13px] font-semibold text-[#1f2937]">Attendance</span>
+            </div>
+            <!-- Inventory -->
+            <div class="bg-[#fafafa] border border-[#f3f4f6] rounded-[12px] p-4 flex flex-col items-center gap-3">
+              <div class="w-10 h-10 bg-[#d6ebff] rounded-[10px] flex items-center justify-center">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 7l7-4 7 4v6l-7 4-7-4V7z" stroke="#3b82f6" stroke-width="1.5" stroke-linejoin="round"/><path d="M10 3v14M3 7l7 4 7-4" stroke="#3b82f6" stroke-width="1.5"/></svg>
+              </div>
+              <span class="text-[13px] font-semibold text-[#1f2937]">Inventory</span>
+            </div>
+            <!-- AI Insights -->
+            <div class="bg-[#fafafa] border border-[#f3f4f6] rounded-[12px] p-4 flex flex-col items-center gap-3">
+              <div class="w-10 h-10 bg-[#d6ebff] rounded-[10px] flex items-center justify-center">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 3C6.134 3 3 6.134 3 10s3.134 7 7 7 7-3.134 7-7" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round"/><path d="M14 3l3 3-5 5" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <span class="text-[13px] font-semibold text-[#1f2937]">AI Insights</span>
+            </div>
+            <!-- Accounts -->
+            <div class="bg-[#fafafa] border border-[#f3f4f6] rounded-[12px] p-4 flex flex-col items-center gap-3">
+              <div class="w-10 h-10 bg-[#d6ebff] rounded-[10px] flex items-center justify-center">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="14" height="14" rx="2" stroke="#3b82f6" stroke-width="1.5"/><path d="M7 10h6M7 7h6M7 13h4" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </div>
+              <span class="text-[13px] font-semibold text-[#1f2937]">Accounts</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════ EVERYTHING YOUR BUSINESS NEEDS ══════════════ -->
+<section class="py-24 lg:py-32">
+  <div class="max-w-[1440px] mx-auto page-x">
+    <h2 class="font-bold text-[#111827] mb-4" style="font-size:clamp(28px,3.5vw,44px);line-height:1.1;letter-spacing:-0.88px">
+      Everything your business needs.
+    </h2>
+    <p class="text-[#4b5563] text-[19px] leading-[30px] mb-14 max-w-[600px]">
+      Six tools, one platform. Use what you need today. Add the rest when you grow.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+
+      <!-- AI Insights -->
+      <div class="bg-white border border-[#e5e7eb] rounded-[16px] p-6 flex flex-col gap-4 overflow-hidden">
+        <div class="w-10 h-10 bg-[#d6ebff] rounded-[10px] flex items-center justify-center flex-shrink-0">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 3C6.134 3 3 6.134 3 10s3.134 7 7 7 7-3.134 7-7" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round"/><path d="M14 3l3 3-5 5" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3 class="text-[18px] font-bold text-[#111827] tracking-[-0.18px]">AI insights</h3>
+        <p class="text-[14px] text-[#4b5563] leading-[22px]">Zentra studies your sales and tells you what to do next. Less guessing, more clear actions every morning.</p>
+      </div>
+
+      <!-- POS & Sales -->
+      <div class="bg-white border border-[#e5e7eb] rounded-[16px] p-6 flex flex-col gap-4 overflow-hidden">
+        <div class="w-10 h-10 bg-[#d6ebff] rounded-[10px] flex items-center justify-center flex-shrink-0">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="4" width="14" height="12" rx="2" stroke="#3b82f6" stroke-width="1.5"/><path d="M7 9h6M7 12h4" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <h3 class="text-[18px] font-bold text-[#111827] tracking-[-0.18px]">POS &amp; Sales</h3>
+        <p class="text-[14px] text-[#4b5563] leading-[22px]">A fast checkout that works on a tablet or a counter PC. Cash, card, voucher and split payments, all handled.</p>
+      </div>
+
+      <!-- Payroll & HR -->
+      <div class="bg-white border border-[#e5e7eb] rounded-[16px] p-6 flex flex-col gap-4 overflow-hidden">
+        <div class="w-10 h-10 bg-[#d6ebff] rounded-[10px] flex items-center justify-center flex-shrink-0">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 3v14M6 7h6a2 2 0 010 4H6m0 3h7" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3 class="text-[18px] font-bold text-[#111827] tracking-[-0.18px]">Payroll &amp; HR</h3>
+        <p class="text-[14px] text-[#4b5563] leading-[22px]">NPF, CSG and PAYE done for you. Payslips ready in one click. Your team sees their hours in real time.</p>
+      </div>
+
+      <!-- Attendance -->
+      <div class="bg-white border border-[#e5e7eb] rounded-[16px] p-6 flex flex-col gap-4 overflow-hidden">
+        <div class="w-10 h-10 bg-[#d6ebff] rounded-[10px] flex items-center justify-center flex-shrink-0">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="8" r="3" stroke="#3b82f6" stroke-width="1.5"/><path d="M4 17c0-3.314 2.686-5 6-5s6 1.686 6 5" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <h3 class="text-[18px] font-bold text-[#111827] tracking-[-0.18px]">Attendance</h3>
+        <p class="text-[14px] text-[#4b5563] leading-[22px]">Clock-in on any device. Late arrivals flagged automatically. Monthly attendance summaries in one tap.</p>
+      </div>
+
+      <!-- Inventory -->
+      <div class="bg-white border border-[#e5e7eb] rounded-[16px] p-6 flex flex-col gap-4 overflow-hidden">
+        <div class="w-10 h-10 bg-[#d6ebff] rounded-[10px] flex items-center justify-center flex-shrink-0">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 7l7-4 7 4v6l-7 4-7-4V7z" stroke="#3b82f6" stroke-width="1.5" stroke-linejoin="round"/><path d="M10 3v14M3 7l7 4 7-4" stroke="#3b82f6" stroke-width="1.5"/></svg>
+        </div>
+        <h3 class="text-[18px] font-bold text-[#111827] tracking-[-0.18px]">Inventory</h3>
+        <p class="text-[14px] text-[#4b5563] leading-[22px]">Live stock levels across all locations. Reorder alerts before you run out. Supplier orders drafted for you.</p>
+      </div>
+
+      <!-- Accounts -->
+      <div class="bg-white border border-[#e5e7eb] rounded-[16px] p-6 flex flex-col gap-4 overflow-hidden">
+        <div class="w-10 h-10 bg-[#d6ebff] rounded-[10px] flex items-center justify-center flex-shrink-0">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="14" height="14" rx="2" stroke="#3b82f6" stroke-width="1.5"/><path d="M7 10h6M7 7h6M7 13h4" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <h3 class="text-[18px] font-bold text-[#111827] tracking-[-0.18px]">Accounts</h3>
+        <p class="text-[14px] text-[#4b5563] leading-[22px]">Sales, expenses and payroll feed automatically into your books. Month-end closes itself.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════ BUILT FOR THE WAY YOU ACTUALLY WORK ══════════════ -->
+<section class="py-24 lg:py-32 bg-[#fafafa]">
+  <div class="max-w-[1440px] mx-auto page-x">
+    <h2 class="font-bold text-[#111827] mb-14" style="font-size:clamp(28px,3.5vw,44px);line-height:1.1;letter-spacing:-0.88px">
+      Built for the way you actually work.
+    </h2>
+
+    <!-- Tab buttons -->
+    <div class="flex gap-2 mb-10 flex-wrap">
+      <button onclick="showTab('retail')"    class="tab-btn active text-[11px] font-bold uppercase tracking-[0.66px] h-[24px] px-3 rounded-full transition-all" id="tab-retail">Retail</button>
+      <button onclick="showTab('fnb')"       class="tab-btn         text-[11px] font-bold uppercase tracking-[0.66px] h-[24px] px-3 rounded-full transition-all" id="tab-fnb">Food &amp; Beverage</button>
+      <button onclick="showTab('salon')"     class="tab-btn         text-[11px] font-bold uppercase tracking-[0.66px] h-[24px] px-3 rounded-full transition-all" id="tab-salon">Salon &amp; Services</button>
+    </div>
+
+    <!-- ── Retail tab ── -->
+    <div class="tab-panel active" id="panel-retail">
+      <div class="border-t border-[#e5e7eb] pt-10 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
+        <div>
+          <h3 class="font-bold text-[#111827] mb-4" style="font-size:clamp(22px,2.5vw,32px);line-height:1.15;letter-spacing:-0.64px">
+            You stop running out of stock on Saturday afternoons.
+          </h3>
+          <p class="text-[16px] text-[#4b5563] leading-[26px] mb-7">
+            Zentra watches sell-through across locations and drafts supplier orders before the shelf empties. You approve in two taps. Phoenix never has to call you again.
+          </p>
+          <ul class="flex flex-col gap-4">
+            <li class="flex items-start gap-3 text-[14px] text-[#374151]">
+              <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" fill="#4f46e5" opacity=".12"/><path d="M5 8l2 2 4-4" stroke="#4f46e5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Live stock across all locations and warehouses
+            </li>
+            <li class="flex items-start gap-3 text-[14px] text-[#374151]">
+              <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" fill="#4f46e5" opacity=".12"/><path d="M5 8l2 2 4-4" stroke="#4f46e5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Supplier orders draft themselves at your reorder point
+            </li>
+            <li class="flex items-start gap-3 text-[14px] text-[#374151]">
+              <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" fill="#4f46e5" opacity=".12"/><path d="M5 8l2 2 4-4" stroke="#4f46e5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Variance reports that name the SKU and the date
+            </li>
+          </ul>
+        </div>
+        <!-- UI mockup -->
+        <div class="bg-white border border-[#e5e7eb] rounded-[14px] ui-shadow overflow-hidden">
+          <div class="border-b border-[#f3f4f6] px-5 py-4">
+            <p class="text-[14px] font-bold text-[#111827]">Stock alert · Curepipe store</p>
+            <p class="text-[12px] text-[#6b7280]">3 items below reorder point</p>
+          </div>
+          <div class="divide-y divide-[#f3f4f6]">
+            <div class="px-5 py-3 flex items-center justify-between">
+              <div>
+                <p class="text-[13px] font-semibold text-[#111827]">Basmati Rice 5 kg</p>
+                <p class="text-[12px] text-[#6b7280]">4 units left · min 20</p>
+              </div>
+              <span class="text-[11px] font-bold text-[#b42318] bg-[#fef3f2] px-2 py-1 rounded-full">Order now</span>
+            </div>
+            <div class="px-5 py-3 flex items-center justify-between">
+              <div>
+                <p class="text-[13px] font-semibold text-[#111827]">Sunflower Oil 1 L</p>
+                <p class="text-[12px] text-[#6b7280]">7 units left · min 24</p>
+              </div>
+              <span class="text-[11px] font-bold text-[#b42318] bg-[#fef3f2] px-2 py-1 rounded-full">Order now</span>
+            </div>
+            <div class="px-5 py-3 flex items-center justify-between">
+              <div>
+                <p class="text-[13px] font-semibold text-[#111827]">Dish Soap 500 ml</p>
+                <p class="text-[12px] text-[#6b7280]">2 units left · min 12</p>
+              </div>
+              <span class="text-[11px] font-bold text-[#b42318] bg-[#fef3f2] px-2 py-1 rounded-full">Order now</span>
+            </div>
+          </div>
+          <div class="bg-[#fafafa] border-t border-[#f3f4f6] px-5 py-3">
+            <p class="text-[12px] text-[#6b7280]">Draft sent to 2 suppliers · pending your approval</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── F&B tab ── -->
+    <div class="tab-panel" id="panel-fnb">
+      <div class="border-t border-[#e5e7eb] pt-10 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
+        <div>
+          <h3 class="font-bold text-[#111827] mb-4" style="font-size:clamp(22px,2.5vw,32px);line-height:1.15;letter-spacing:-0.64px">
+            The lunch rush is no longer a coordination problem.
+          </h3>
+          <p class="text-[16px] text-[#4b5563] leading-[26px] mb-7">
+            Tables, orders, kitchen tickets and payments share one screen. Your front of house knows what is delayed. Your kitchen knows what is next. Your accountant sees the day close at midnight.
+          </p>
+          <ul class="flex flex-col gap-4">
+            <li class="flex items-start gap-3 text-[14px] text-[#374151]">
+              <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" fill="#4f46e5" opacity=".12"/><path d="M5 8l2 2 4-4" stroke="#4f46e5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Floor map, KDS and POS in one workspace
+            </li>
+            <li class="flex items-start gap-3 text-[14px] text-[#374151]">
+              <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" fill="#4f46e5" opacity=".12"/><path d="M5 8l2 2 4-4" stroke="#4f46e5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Split bills, card on delivery, table transfers
+            </li>
+            <li class="flex items-start gap-3 text-[14px] text-[#374151]">
+              <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" fill="#4f46e5" opacity=".12"/><path d="M5 8l2 2 4-4" stroke="#4f46e5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              End-of-day Z-report posted automatically
+            </li>
+          </ul>
+        </div>
+        <!-- UI mockup -->
+        <div class="bg-white border border-[#e5e7eb] rounded-[14px] ui-shadow overflow-hidden">
+          <div class="border-b border-[#f3f4f6] px-5 py-4 flex items-center justify-between">
+            <p class="text-[14px] font-bold text-[#111827]">Floor · Lunch service</p>
+            <span class="text-[11px] font-bold text-[#4f46e5] bg-[#eef2ff] px-2.5 py-1 rounded-full">8 tables open</span>
+          </div>
+          <div class="grid grid-cols-4 gap-3 p-5">
+            <div class="border border-[#e5e7eb] rounded-[8px] p-3 text-center"><p class="text-[11px] font-bold text-[#4f46e5]">T1</p><p class="text-[9px] text-[#6b7280]">open</p><p class="text-[11px] font-semibold text-[#111827] mt-1">Rs 640</p></div>
+            <div class="border border-[#e5e7eb] rounded-[8px] p-3 text-center"><p class="text-[11px] font-bold text-[#4f46e5]">T2</p><p class="text-[9px] text-[#6b7280]">open</p><p class="text-[11px] font-semibold text-[#111827] mt-1">Rs 210</p></div>
+            <div class="border border-[#f3f4f6] rounded-[8px] p-3 text-center bg-[#f9fafb]"><p class="text-[11px] font-bold text-[#9ca3af]">T3</p><p class="text-[9px] text-[#d1d9e6]">free</p><p class="text-[11px] font-semibold text-[#d1d9e6] mt-1">—</p></div>
+            <div class="border-2 border-[rgba(79,70,229,0.2)] rounded-[8px] p-3 text-center"><p class="text-[11px] font-bold text-[#4f46e5]">T8</p><p class="text-[9px] text-[#6b7280]">open</p><p class="text-[11px] font-semibold text-[#111827] mt-1">Rs 380</p></div>
+          </div>
+          <div class="bg-[#fafafa] border-t border-[#f3f4f6] px-5 py-3 flex justify-between">
+            <p class="text-[12px] text-[#6b7280]">Avg. table time</p>
+            <p class="text-[12px] font-semibold text-[#111827]">52 min · ↓ 8 min vs last week</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Salon tab ── -->
+    <div class="tab-panel" id="panel-salon">
+      <div class="border-t border-[#e5e7eb] pt-10 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
+        <div>
+          <h3 class="font-bold text-[#111827] mb-4" style="font-size:clamp(22px,2.5vw,32px);line-height:1.15;letter-spacing:-0.64px">
+            Every appointment turns into a paid invoice.
+          </h3>
+          <p class="text-[16px] text-[#4b5563] leading-[26px] mb-7">
+            Bookings, reminders, payments and staff commissions in one flow. No chasing. No double-booking. No end-of-week drama.
+          </p>
+          <ul class="flex flex-col gap-4">
+            <li class="flex items-start gap-3 text-[14px] text-[#374151]">
+              <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" fill="#4f46e5" opacity=".12"/><path d="M5 8l2 2 4-4" stroke="#4f46e5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Online booking with SMS and WhatsApp reminders
+            </li>
+            <li class="flex items-start gap-3 text-[14px] text-[#374151]">
+              <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" fill="#4f46e5" opacity=".12"/><path d="M5 8l2 2 4-4" stroke="#4f46e5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Per-stylist commission, calculated automatically
+            </li>
+            <li class="flex items-start gap-3 text-[14px] text-[#374151]">
+              <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" fill="#4f46e5" opacity=".12"/><path d="M5 8l2 2 4-4" stroke="#4f46e5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Customer history visible the moment they walk in
+            </li>
+          </ul>
+        </div>
+        <!-- UI mockup -->
+        <div class="bg-white border border-[#e5e7eb] rounded-[14px] ui-shadow overflow-hidden">
+          <div class="border-b border-[#f3f4f6] px-5 py-4">
+            <p class="text-[14px] font-bold text-[#111827]">Today's bookings · Lumière Salon</p>
+            <p class="text-[12px] text-[#6b7280]">6 appointments · 3 stylists</p>
+          </div>
+          <div class="divide-y divide-[#f3f4f6]">
+            <div class="px-5 py-3 flex items-center justify-between">
+              <div><p class="text-[13px] font-semibold text-[#111827]">Priya Ramjee — Cut &amp; Colour</p><p class="text-[12px] text-[#6b7280]">10:00 · Sandrine</p></div>
+              <span class="text-[11px] font-bold text-[#166534] bg-[#f0fdf4] px-2 py-1 rounded-full">Confirmed</span>
+            </div>
+            <div class="px-5 py-3 flex items-center justify-between">
+              <div><p class="text-[13px] font-semibold text-[#111827]">Marc Lebrasse — Blowdry</p><p class="text-[12px] text-[#6b7280]">11:30 · Camille</p></div>
+              <span class="text-[11px] font-bold text-[#92400e] bg-[#fff7ed] px-2 py-1 rounded-full">In progress</span>
+            </div>
+            <div class="px-5 py-3 flex items-center justify-between">
+              <div><p class="text-[13px] font-semibold text-[#111827]">Sophie Ng — Highlights</p><p class="text-[12px] text-[#6b7280]">14:00 · Sandrine</p></div>
+              <span class="text-[11px] font-bold text-[#6b7280] bg-[#f3f4f6] px-2 py-1 rounded-full">Pending</span>
+            </div>
+          </div>
+          <div class="bg-[#fafafa] border-t border-[#f3f4f6] px-5 py-3">
+            <p class="text-[12px] text-[#6b7280]">Auto SMS reminders sent the evening before. Cancellations re-open the slot in real time.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════ TRY ZENTRA FREE ══════════════ -->
+<section class="py-24 lg:py-32">
+  <div class="max-w-[1440px] mx-auto page-x">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-start">
+
+      <!-- Left: content -->
+      <div>
+        <div class="inline-flex items-center gap-2 h-[29px] px-3 badge-blue rounded-full mb-8">
+          <span class="w-[6px] h-[6px] badge-dot-indigo rounded-[3px] flex-shrink-0"></span>
+          <span class="text-[12px] font-semibold tracking-[0.24px]">Try it first</span>
+        </div>
+        <h2 class="font-bold text-[#111827] mb-6" style="font-size:clamp(26px,3.5vw,44px);line-height:1.1;letter-spacing:-0.88px">
+          Try Zentra free. No credit card. No commitment.
+        </h2>
+        <p class="text-[#4b5563] text-[19px] leading-[30px] mb-10">
+          We've just launched, so we'd rather you try the product than read about it. Test every module at your own pace, get set up in under a week, and only continue if it works for your business.
+        </p>
+
+        <ul class="flex flex-col gap-7 mb-10">
+          <li class="flex items-start gap-4">
+            <div class="w-7 h-7 bg-[#4f46e5] rounded-[14px] flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7l3 3 5-5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div>
+              <p class="text-[15px] font-semibold text-[#111827] tracking-[-0.075px]">No credit card required</p>
+              <p class="text-[14px] text-[#6b7280] leading-[22px]">Sign up with an email and a phone number.</p>
+            </div>
+          </li>
+          <li class="flex items-start gap-4">
+            <div class="w-7 h-7 bg-[#4f46e5] rounded-[14px] flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7l3 3 5-5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div>
+              <p class="text-[15px] font-semibold text-[#111827] tracking-[-0.075px]">Full access to every module</p>
+              <p class="text-[14px] text-[#6b7280] leading-[22px]">POS, Inventory, Payroll, Accounting — nothing locked.</p>
+            </div>
+          </li>
+          <li class="flex items-start gap-4">
+            <div class="w-7 h-7 bg-[#4f46e5] rounded-[14px] flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7l3 3 5-5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div>
+              <p class="text-[15px] font-semibold text-[#111827] tracking-[-0.075px]">Set up in under a week</p>
+              <p class="text-[14px] text-[#6b7280] leading-[22px]">We import your products, staff and suppliers for you.</p>
+            </div>
+          </li>
+        </ul>
+
+        <a href="#" class="inline-flex items-center justify-center gap-2 bg-[#4f46e5] hover:bg-[#4338ca] text-white text-[16px] font-semibold h-[52px] px-7 rounded-[8px] transition-colors shadow-[0_1px_1px_rgba(0,0,0,.05)] w-full sm:w-auto">
+          Start free trial
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8.5 3.5L13 8l-4.5 4.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <!-- Right: product screenshot -->
+      <div class="rounded-[12px] border border-[#e5e7eb] overflow-hidden card-shadow">
+        <img src="https://www.figma.com/api/mcp/asset/0748356a-a534-43c2-810c-5c5c7cd7f2fa" alt="Zentra dashboard" class="w-full object-cover"/>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════ PRICING ══════════════ -->
+<section class="py-24 lg:py-32 bg-[#fafafa]" id="pricing">
+  <div class="max-w-[1440px] mx-auto page-x">
+    <div class="text-center mb-14">
+      <h2 class="font-bold text-[#111827] mb-4" style="font-size:clamp(28px,3.5vw,44px);line-height:1.1;letter-spacing:-0.88px">
+        Simple plans, made for Mauritian SMEs.
+      </h2>
+      <p class="text-[19px] text-[#4b5563] leading-[30px]">All prices in MUR. Cancel any time.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 items-start">
+
+      <!-- Starter -->
+      <div class="bg-white border border-[#e5e7eb] rounded-[16px] p-8 flex flex-col gap-6">
+        <div>
+          <h3 class="text-[18px] font-bold text-[#111827] mb-1">Starter</h3>
+          <p class="text-[14px] text-[#6b7280]">For a single-location shop or salon.</p>
+        </div>
+        <a href="#" class="w-full text-center bg-white border border-[#d1d9e6] hover:border-[#c4cfe0] text-[#1f2937] text-[15px] font-semibold h-[48px] rounded-[8px] flex items-center justify-center transition-colors">
+          Start free trial
+        </a>
+        <ul class="flex flex-col gap-3 text-[14px] text-[#374151]">
+          <li class="flex items-center gap-2.5"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" fill="#4f46e5" opacity=".12"/><path d="M5 8l2 2 4-4" stroke="#4f46e5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>1 location</li>
+          <li class="flex items-center gap-2.5"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" fill="#4f46e5" opacity=".12"/><path d="M5 8l2 2 4-4" stroke="#4f46e5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Up to 5 staff</li>
+          <li class="flex items-center gap-2.5"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" fill="#4f46e5" opacity=".12"/><path d="M5 8l2 2 4-4" stroke="#4f46e5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>POS &amp; Sales</li>
+          <li class="flex items-center gap-2.5"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" fill="#4f46e5" opacity=".12"/><path d="M5 8l2 2 4-4" stroke="#4f46e5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Basic inventory</li>
+          <li class="flex items-center gap-2.5"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" fill="#4f46e5" opacity=".12"/><path d="M5 8l2 2 4-4" stroke="#4f46e5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>WhatsApp receipts</li>
+        </ul>
+      </div>
+
+      <!-- Growth (featured) -->
+      <div class="bg-white border-2 border-[#4f46e5] rounded-[16px] p-8 flex flex-col gap-6 relative shadow-[0_0_0_1px_#4f46e5]" style="box-shadow:0 0 0 1px #4f46e5, 0 20px 40px -12px rgba(79,70,229,0.18)">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#4f46e5] text-white text-[11px] font-bold tracking-[0.5px] uppercase px-3 h-[22px] flex items-center rounded-full">Most popular</div>
+        <div>
+          <h3 class="text-[18px] font-bold text-[#111827] mb-1">Growth</h3>
+          <p class="text-[14px] text-[#6b7280]">For growing businesses with multiple staff.</p>
+        </div>
+        <a href="#" class="w-full text-center bg-[#4f46e5] hover:bg-[#4338ca] text-white text-[15px] font-semibold h-[48px] rounded-[8px] flex items-center justify-center transition-colors">
+          Start free trial
+        </a>
+        <ul class="flex flex-col gap-3 text-[14px] text-[#374151]">
+          <li class="flex items-center gap-2.5"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" fill="#4f46e5" opacity=".12"/><path d="M5 8l2 2 4-4" stroke="#4f46e5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Up to 3 locations</li>
+          <li class="flex items-center gap-2.5"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" fill="#4f46e5" opacity=".12"/><path d="M5 8l2 2 4-4" stroke="#4f46e5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Up to 20 staff</li>
+          <li class="flex items-center gap-2.5"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" fill="#4f46e5" opacity=".12"/><path d="M5 8l2 2 4-4" stroke="#4f46e5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Everything in Starter</li>
+          <li class="flex items-center gap-2.5"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" fill="#4f46e5" opacity=".12"/><path d="M5 8l2 2 4-4" stroke="#4f46e5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Payroll &amp; NPF/CSG/PAYE</li>
+          <li class="flex items-center gap-2.5"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" fill="#4f46e5" opacity=".12"/><path d="M5 8l2 2 4-4" stroke="#4f46e5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Attendance tracking</li>
+          <li class="flex items-center gap-2.5"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" fill="#4f46e5" opacity=".12"/><path d="M5 8l2 2 4-4" stroke="#4f46e5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>AI insights dashboard</li>
+        </ul>
+      </div>
+
+      <!-- Scale -->
+      <div class="bg-white border border-[#e5e7eb] rounded-[16px] p-8 flex flex-col gap-6">
+        <div>
+          <h3 class="text-[18px] font-bold text-[#111827] mb-1">Scale</h3>
+          <p class="text-[14px] text-[#6b7280]">For larger operations and chains.</p>
+        </div>
+        <a href="#" class="w-full text-center bg-white border border-[#d1d9e6] hover:border-[#c4cfe0] text-[#1f2937] text-[15px] font-semibold h-[48px] rounded-[8px] flex items-center justify-center transition-colors">
+          Book a demo
+        </a>
+        <ul class="flex flex-col gap-3 text-[14px] text-[#374151]">
+          <li class="flex items-center gap-2.5"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" fill="#4f46e5" opacity=".12"/><path d="M5 8l2 2 4-4" stroke="#4f46e5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Unlimited locations</li>
+          <li class="flex items-center gap-2.5"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" fill="#4f46e5" opacity=".12"/><path d="M5 8l2 2 4-4" stroke="#4f46e5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Unlimited staff</li>
+          <li class="flex items-center gap-2.5"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" fill="#4f46e5" opacity=".12"/><path d="M5 8l2 2 4-4" stroke="#4f46e5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Everything in Growth</li>
+          <li class="flex items-center gap-2.5"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" fill="#4f46e5" opacity=".12"/><path d="M5 8l2 2 4-4" stroke="#4f46e5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Dedicated onboarding</li>
+          <li class="flex items-center gap-2.5"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" fill="#4f46e5" opacity=".12"/><path d="M5 8l2 2 4-4" stroke="#4f46e5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Priority support (WhatsApp)</li>
+          <li class="flex items-center gap-2.5"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" fill="#4f46e5" opacity=".12"/><path d="M5 8l2 2 4-4" stroke="#4f46e5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Custom integrations</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════ FAQ ══════════════ -->
+<section class="py-24 lg:py-32" id="faq">
+  <div class="max-w-[1440px] mx-auto page-x">
+    <div class="max-w-[720px] mx-auto">
+      <h2 class="font-bold text-[#111827] mb-14" style="font-size:clamp(28px,3.5vw,44px);line-height:1.1;letter-spacing:-0.88px">
+        Questions, answered.
+      </h2>
+
+      <div class="flex flex-col divide-y divide-[#e5e7eb]" id="faq-list">
+
+        <div class="faq-item py-5 cursor-pointer" onclick="toggleFaq(this)">
+          <div class="flex items-center justify-between gap-4">
+            <span class="text-[17px] font-semibold text-[#111827]">Is Zentra built for Mauritius specifically?</span>
+            <svg class="faq-icon flex-shrink-0 text-[#6b7280]" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 10h10M10 5v10" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg>
+          </div>
+          <div class="faq-answer">
+            <p class="text-[15px] text-[#4b5563] leading-[26px] pt-4">Yes. Zentra handles MUR currency, NPF, CSG, and PAYE calculations out of the box. VAT reporting is built in. All defaults are set for Mauritian businesses from day one.</p>
+          </div>
+        </div>
+
+        <div class="faq-item py-5 cursor-pointer" onclick="toggleFaq(this)">
+          <div class="flex items-center justify-between gap-4">
+            <span class="text-[17px] font-semibold text-[#111827]">How long does setup take?</span>
+            <svg class="faq-icon flex-shrink-0 text-[#6b7280]" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 10h10M10 5v10" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg>
+          </div>
+          <div class="faq-answer">
+            <p class="text-[15px] text-[#4b5563] leading-[26px] pt-4">Most businesses are live within a week. We import your products, staff list, and suppliers for you. You don't need an IT team — if you can use WhatsApp, you can use Zentra.</p>
+          </div>
+        </div>
+
+        <div class="faq-item py-5 cursor-pointer" onclick="toggleFaq(this)">
+          <div class="flex items-center justify-between gap-4">
+            <span class="text-[17px] font-semibold text-[#111827]">What happens to my data if I cancel?</span>
+            <svg class="faq-icon flex-shrink-0 text-[#6b7280]" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 10h10M10 5v10" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg>
+          </div>
+          <div class="faq-answer">
+            <p class="text-[15px] text-[#4b5563] leading-[26px] pt-4">Your data is yours. You can export everything — sales history, staff records, inventory — as a CSV at any time. We keep your data for 90 days after cancellation, then delete it securely.</p>
+          </div>
+        </div>
+
+        <div class="faq-item py-5 cursor-pointer" onclick="toggleFaq(this)">
+          <div class="flex items-center justify-between gap-4">
+            <span class="text-[17px] font-semibold text-[#111827]">Does it work offline or if the internet cuts?</span>
+            <svg class="faq-icon flex-shrink-0 text-[#6b7280]" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 10h10M10 5v10" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg>
+          </div>
+          <div class="faq-answer">
+            <p class="text-[15px] text-[#4b5563] leading-[26px] pt-4">The POS continues to process sales offline. Transactions queue locally and sync automatically when your connection returns. You'll never lose a sale because of a network drop.</p>
+          </div>
+        </div>
+
+        <div class="faq-item py-5 cursor-pointer" onclick="toggleFaq(this)">
+          <div class="flex items-center justify-between gap-4">
+            <span class="text-[17px] font-semibold text-[#111827]">Can I try it before committing to a plan?</span>
+            <svg class="faq-icon flex-shrink-0 text-[#6b7280]" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 10h10M10 5v10" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg>
+          </div>
+          <div class="faq-answer">
+            <p class="text-[15px] text-[#4b5563] leading-[26px] pt-4">Yes. Every plan starts with a free trial — no credit card required. You get full access to every module. Only pay when you're confident it works for your business.</p>
+          </div>
+        </div>
+
+        <div class="faq-item py-5 cursor-pointer" onclick="toggleFaq(this)">
+          <div class="flex items-center justify-between gap-4">
+            <span class="text-[17px] font-semibold text-[#111827]">Who do I call if something breaks?</span>
+            <svg class="faq-icon flex-shrink-0 text-[#6b7280]" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 10h10M10 5v10" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg>
+          </div>
+          <div class="faq-answer">
+            <p class="text-[15px] text-[#4b5563] leading-[26px] pt-4">We're reachable on WhatsApp during business hours. You can also book a call directly with one of the founders — we're a small team and we take support seriously.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════ TALK TO THE FOUNDERS ══════════════ -->
+<section class="py-24 lg:py-32 bg-[#fafafa]" id="founders">
+  <div class="max-w-[1440px] mx-auto page-x">
+
+    <!-- Centered header -->
+    <div class="text-center mb-14">
+      <div class="inline-flex items-center gap-2 h-[29px] px-3 badge-blue rounded-full mb-6">
+        <span class="w-[6px] h-[6px] badge-dot-indigo rounded-[3px] flex-shrink-0"></span>
+        <span class="text-[12px] font-semibold tracking-[0.24px]">Talk to a human</span>
+      </div>
+      <h2 class="font-extrabold text-[#111827] mb-4" style="font-size:clamp(32px,4vw,52px);line-height:1.05;letter-spacing:-1px">
+        Talk to the founders.
+      </h2>
+      <p class="text-[18px] text-[#4b5563] leading-[28px] max-w-[480px] mx-auto">
+        Direct WhatsApp access to the people who built Zentra. No call centre, no sales script.
+      </p>
+    </div>
+
+    <!-- Founder cards -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-[860px] mx-auto">
+
+      <!-- Jordan -->
+      <div class="bg-white border border-[#e5e7eb] rounded-[20px] p-8 flex flex-col items-center text-center gap-4">
+        <img
+          src="https://www.figma.com/api/mcp/asset/34ef827d-9bca-4c98-8e8b-378c42600398"
+          alt="Jordan Martin"
+          class="w-24 h-24 rounded-full object-cover bg-gray-100 mb-2"
+        />
+        <div>
+          <p class="text-[20px] font-bold text-[#111827]">Jordan Martin</p>
+          <p class="text-[15px] text-[#6b7280] mt-1">Founder</p>
+        </div>
+        <a href="https://wa.me/23057000000"
+           class="w-full inline-flex items-center justify-center gap-2.5
+                  bg-[#25d366] hover:bg-[#1ebe5d]
+                  text-white text-[15px] font-semibold
+                  h-[52px] rounded-[12px] transition-colors mt-2">
+          <svg class="hidden sm:block" width="20" height="20" viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.532 5.854L.057 23.571a.75.75 0 00.919.908l5.808-1.461A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.713 9.713 0 01-4.951-1.354l-.355-.21-3.684.927.963-3.595-.231-.371A9.718 9.718 0 012.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/>
+          </svg>
+          Message Jordan on WhatsApp
+        </a>
+      </div>
+
+      <!-- Dhiren -->
+      <div class="bg-white border border-[#e5e7eb] rounded-[20px] p-8 flex flex-col items-center text-center gap-4">
+        <img
+          src="https://www.figma.com/api/mcp/asset/cf97af1b-6d29-486b-97b8-527f9a1bb447"
+          alt="Dhiren Moorvin"
+          class="w-24 h-24 rounded-full object-cover bg-gray-100 mb-2"
+        />
+        <div>
+          <p class="text-[20px] font-bold text-[#111827]">Dhiren Moorvin</p>
+          <p class="text-[15px] text-[#6b7280] mt-1">Head of Product</p>
+        </div>
+        <a href="https://wa.me/23057000001"
+           class="w-full inline-flex items-center justify-center gap-2.5
+                  bg-[#25d366] hover:bg-[#1ebe5d]
+                  text-white text-[15px] font-semibold
+                  h-[52px] rounded-[12px] transition-colors mt-2">
+          <svg class="hidden sm:block" width="20" height="20" viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.532 5.854L.057 23.571a.75.75 0 00.919.908l5.808-1.461A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.713 9.713 0 01-4.951-1.354l-.355-.21-3.684.927.963-3.595-.231-.371A9.718 9.718 0 012.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/>
+          </svg>
+          Message Dhiren on WhatsApp
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════ FOOTER ══════════════ -->
+<footer class="border-t border-[#e5e7eb] bg-white">
+  <div class="max-w-[1440px] mx-auto page-x py-10 flex flex-col sm:flex-row items-center justify-between gap-4">
+    <div class="flex items-center gap-3">
+      <svg width="82" height="20" viewBox="0 0 109 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Zentra">
+        <g clip-path="url(#logo-footer)">
+          <path d="M24.2929 1.06665H1.27858C0.572438 1.06665 0 1.63909 0 2.34523V6.18096C0 6.88709 0.572438 7.45953 1.27858 7.45953H24.2929C24.9991 7.45953 25.5715 6.88709 25.5715 6.18096V2.34523C25.5715 1.63909 24.9991 1.06665 24.2929 1.06665Z" fill="#4F46E5"/>
+          <path d="M30.6858 9.59045H7.67146C6.96532 9.59045 6.39288 10.1629 6.39288 10.869V14.7048C6.39288 15.4109 6.96532 15.9833 7.67146 15.9833H30.6858C31.392 15.9833 31.9644 15.4109 31.9644 14.7048V10.869C31.9644 10.1629 31.392 9.59045 30.6858 9.59045Z" fill="#7C3AED" fill-opacity="0.85"/>
+          <path d="M24.2929 18.114H1.27858C0.572438 18.114 0 18.6865 0 19.3926V23.2283C0 23.9345 0.572438 24.5069 1.27858 24.5069H24.2929C24.9991 24.5069 25.5715 23.9345 25.5715 23.2283V19.3926C25.5715 18.6865 24.9991 18.114 24.2929 18.114Z" fill="#4F46E5"/>
+        </g>
+        <path d="M42.9707 21V18.4434L50.0498 9.74219C50.3148 9.41992 50.5833 9.10124 50.8555 8.78613C51.1276 8.46387 51.4033 8.14518 51.6826 7.83008H43.207V4.99414H55.7002V7.55078L48.7393 16.166C48.4671 16.4954 48.1878 16.8285 47.9014 17.165C47.6221 17.5016 47.3356 17.8346 47.042 18.1641H55.7754V21H42.9707ZM62.2104 21.2578C61.0646 21.2578 60.0655 21.0036 59.2133 20.4951C58.3683 19.9867 57.7094 19.2884 57.2368 18.4004C56.7713 17.5052 56.5385 16.4847 56.5385 15.3389C56.5385 14.1859 56.7748 13.1618 57.2475 12.2666C57.7273 11.3714 58.3862 10.6696 59.2241 10.1611C60.062 9.65267 61.0216 9.39844 62.103 9.39844C63.2202 9.39844 64.1941 9.64909 65.0248 10.1504C65.8627 10.6445 66.5144 11.3356 66.9799 12.2236C67.4526 13.1045 67.6889 14.1214 67.6889 15.2744V16.123H59.6215C59.6502 16.9609 59.8972 17.6305 60.3627 18.1318C60.8282 18.6331 61.4763 18.8838 62.3071 18.8838C62.923 18.8838 63.435 18.7513 63.8432 18.4863C64.2586 18.2214 64.5379 17.8704 64.6811 17.4336H67.5707C67.4347 18.1855 67.116 18.848 66.6147 19.4209C66.1134 19.9938 65.4832 20.445 64.7241 20.7744C63.9649 21.0967 63.1271 21.2578 62.2104 21.2578ZM59.643 14.1035H64.7026C64.6238 13.3945 64.3588 12.8359 63.9077 12.4277C63.4636 12.0124 62.8836 11.8047 62.1674 11.8047C61.4584 11.8047 60.8819 12.0124 60.4379 12.4277C59.9939 12.8359 59.7289 13.3945 59.643 14.1035ZM72.1151 14.6943V21H68.9462V9.65625H72.0614V11.4395C72.4481 10.7949 72.9315 10.2972 73.5116 9.94629C74.0917 9.59538 74.7899 9.41992 75.6063 9.41992C76.8095 9.41992 77.7727 9.81022 78.496 10.5908C79.2193 11.3643 79.5809 12.4671 79.5809 13.8994V21H76.4227V14.4795C76.4227 13.7204 76.2401 13.1439 75.8749 12.75C75.5096 12.349 74.9976 12.1484 74.3388 12.1484C73.6871 12.1484 73.1535 12.3525 72.7382 12.7607C72.3228 13.1689 72.1151 13.8135 72.1151 14.6943ZM87.9173 9.65625V12.1377H85.597V17.498C85.597 17.8848 85.6722 18.1533 85.8226 18.3037C85.9801 18.4469 86.2738 18.5186 86.7034 18.5186H87.9173V21H86.0696C84.8236 21 83.9033 20.7565 83.3089 20.2695C82.7217 19.7826 82.428 19.0234 82.428 17.9922V12.1377H80.473V9.65625H82.428V6.5625H85.597V9.65625H87.9173ZM89.0779 21V9.65625H92.1287V11.5898H92.1609C92.3686 10.9095 92.6944 10.4046 93.1384 10.0752C93.5824 9.74577 94.1804 9.58105 94.9324 9.58105C95.1186 9.58105 95.2869 9.58464 95.4373 9.5918C95.5948 9.59896 95.738 9.60254 95.867 9.60254V12.2988C95.7524 12.2917 95.5626 12.2809 95.2976 12.2666C95.0326 12.2523 94.7677 12.2451 94.5027 12.2451C93.851 12.2451 93.3103 12.4671 92.8806 12.9111C92.4581 13.3551 92.2468 14.0033 92.2468 14.8555V21H89.0779ZM100.143 21.1934C99.0113 21.1934 98.0767 20.9105 97.3391 20.3447C96.6086 19.779 96.2434 18.9303 96.2434 17.7988C96.2434 16.9466 96.4475 16.2806 96.8557 15.8008C97.2639 15.3138 97.8046 14.9593 98.4777 14.7373C99.1509 14.5153 99.8814 14.3685 100.669 14.2969C101.708 14.1895 102.434 14.082 102.85 13.9746C103.265 13.8672 103.473 13.6309 103.473 13.2656V13.1904C103.473 12.7751 103.308 12.4349 102.979 12.1699C102.649 11.9049 102.195 11.7725 101.614 11.7725C101.027 11.7725 100.551 11.9085 100.186 12.1807C99.8205 12.4528 99.62 12.8073 99.5842 13.2441H96.6086C96.6802 12.0768 97.16 11.1494 98.048 10.4619C98.9361 9.76725 100.157 9.41992 101.711 9.41992C103.265 9.41992 104.468 9.76725 105.321 10.4619C106.173 11.1494 106.599 12.0983 106.599 13.3086V21H103.505V19.3994H103.462C103.161 19.9508 102.75 20.3877 102.227 20.71C101.704 21.0322 101.009 21.1934 100.143 21.1934ZM101.024 18.9912C101.783 18.9912 102.384 18.7907 102.828 18.3896C103.272 17.9814 103.494 17.4694 103.494 16.8535V15.7148C103.315 15.8151 103.018 15.9082 102.603 15.9941C102.187 16.0729 101.725 16.1517 101.217 16.2305C100.673 16.3164 100.211 16.474 99.8312 16.7031C99.4589 16.9251 99.2727 17.2617 99.2727 17.7129C99.2727 18.1139 99.4302 18.429 99.7453 18.6582C100.068 18.8802 100.494 18.9912 101.024 18.9912Z" fill="#111827"/>
+        <defs><clipPath id="logo-footer"><rect width="32.3906" height="25.1875" fill="white" transform="translate(0 0.40625)"/></clipPath></defs>
+      </svg>
+      <span class="text-[13px] text-[#9ca3af]">© 2026 · Made in Mauritius</span>
+    </div>
+    <div class="flex items-center gap-6 text-[13px] text-[#6b7280]">
+      <a href="#" class="hover:text-[#111827] transition-colors">Privacy</a>
+      <a href="#" class="hover:text-[#111827] transition-colors">Terms</a>
+      <a href="#" class="hover:text-[#111827] transition-colors">Contact</a>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+  // Tab switching
+  function showTab(id) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('panel-' + id).classList.add('active');
+    document.getElementById('tab-' + id).classList.add('active');
+  }
+
+  // FAQ accordion
+  function toggleFaq(el) {
+    const isOpen = el.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) el.classList.add('open');
+  }
+</script>
+</body>
+</html>
