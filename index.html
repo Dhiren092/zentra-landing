@@ -5,8 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Zentra — One software to run your whole business</title>
   <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+  <link rel="preload" as="image" href="./zentra-ui.webp" type="image/webp">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
@@ -131,7 +133,10 @@
           <!-- Tablet frame -->
           <div class="rounded-[28px] bg-[#18181b] p-[10px] shadow-[0_32px_80px_-16px_rgba(0,0,0,0.36),0_0_0_1px_rgba(255,255,255,0.06)]">
             <div class="rounded-[20px] overflow-hidden border border-[rgba(255,255,255,0.08)]">
-              <img src="./zentra-ui.jpg" alt="Zentra POS dashboard" class="w-full block"/>
+              <picture>
+                <source srcset="./zentra-ui.webp" type="image/webp">
+                <img src="./zentra-ui-opt.jpg" alt="Zentra POS dashboard" class="w-full block" fetchpriority="high" decoding="async">
+              </picture>
             </div>
           </div>
           <!-- Floating sales card -->
@@ -185,7 +190,7 @@
       <!-- Card 1: Sales -->
       <div class="bg-white border border-[#e5e7eb] rounded-[12px] p-7 flex flex-col gap-5">
         <div class="rounded-[8px] h-[130px] overflow-hidden">
-          <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=600&h=260&q=80" alt="Cash register" class="w-full h-full object-cover"/>
+          <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=600&h=260&q=75&fm=webp" alt="Cash register" class="w-full h-full object-cover" loading="lazy" decoding="async"/>
         </div>
         <div>
           <h3 class="text-[17px] font-semibold text-[#111827] tracking-[-0.17px] mb-2">Sales in one place</h3>
@@ -196,7 +201,7 @@
       <!-- Card 2: Payroll -->
       <div class="bg-white border border-[#e5e7eb] rounded-[12px] p-7 flex flex-col gap-5">
         <div class="rounded-[8px] h-[130px] overflow-hidden">
-          <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=600&h=260&q=80" alt="Payroll spreadsheet" class="w-full h-full object-cover"/>
+          <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=600&h=260&q=75&fm=webp" alt="Payroll spreadsheet" class="w-full h-full object-cover" loading="lazy" decoding="async"/>
         </div>
         <div>
           <h3 class="text-[17px] font-semibold text-[#111827] tracking-[-0.17px] mb-2">Payroll in a spreadsheet</h3>
@@ -207,7 +212,7 @@
       <!-- Card 3: Stock -->
       <div class="bg-white border border-[#e5e7eb] rounded-[12px] p-7 flex flex-col gap-5">
         <div class="rounded-[8px] h-[130px] overflow-hidden">
-          <img src="https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&w=600&h=260&q=80" alt="Warehouse inventory" class="w-full h-full object-cover"/>
+          <img src="https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&w=600&h=260&q=75&fm=webp" alt="Warehouse inventory" class="w-full h-full object-cover" loading="lazy" decoding="async"/>
         </div>
         <div>
           <h3 class="text-[17px] font-semibold text-[#111827] tracking-[-0.17px] mb-2">Stock you cannot trust</h3>
@@ -312,7 +317,7 @@
       <!-- AI Insights -->
       <div class="bg-white border border-[#e5e7eb] rounded-[16px] overflow-hidden flex flex-col">
         <div class="h-[148px] overflow-hidden">
-          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&h=296&q=80" alt="AI analytics" class="w-full h-full object-cover"/>
+          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&h=296&q=75&fm=webp" alt="AI analytics" class="w-full h-full object-cover" loading="lazy" decoding="async"/>
         </div>
         <div class="p-6 flex flex-col gap-3">
           <h3 class="text-[18px] font-bold text-[#111827] tracking-[-0.18px]">AI insights</h3>
@@ -323,7 +328,7 @@
       <!-- POS & Sales -->
       <div class="bg-white border border-[#e5e7eb] rounded-[16px] overflow-hidden flex flex-col">
         <div class="h-[148px] overflow-hidden">
-          <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=600&h=296&q=80" alt="Retail store" class="w-full h-full object-cover"/>
+          <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=600&h=296&q=75&fm=webp" alt="Retail store" class="w-full h-full object-cover" loading="lazy" decoding="async"/>
         </div>
         <div class="p-6 flex flex-col gap-3">
           <h3 class="text-[18px] font-bold text-[#111827] tracking-[-0.18px]">POS &amp; Sales</h3>
@@ -334,7 +339,7 @@
       <!-- Payroll & HR -->
       <div class="bg-white border border-[#e5e7eb] rounded-[16px] overflow-hidden flex flex-col">
         <div class="h-[148px] overflow-hidden">
-          <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&h=296&q=80" alt="Team at work" class="w-full h-full object-cover"/>
+          <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&h=296&q=75&fm=webp" alt="Team at work" class="w-full h-full object-cover" loading="lazy" decoding="async"/>
         </div>
         <div class="p-6 flex flex-col gap-3">
           <h3 class="text-[18px] font-bold text-[#111827] tracking-[-0.18px]">Payroll &amp; HR</h3>
@@ -345,7 +350,7 @@
       <!-- Attendance -->
       <div class="bg-white border border-[#e5e7eb] rounded-[16px] overflow-hidden flex flex-col">
         <div class="h-[148px] overflow-hidden">
-          <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600&h=296&q=80" alt="Team collaboration" class="w-full h-full object-cover"/>
+          <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600&h=296&q=75&fm=webp" alt="Team collaboration" class="w-full h-full object-cover" loading="lazy" decoding="async"/>
         </div>
         <div class="p-6 flex flex-col gap-3">
           <h3 class="text-[18px] font-bold text-[#111827] tracking-[-0.18px]">Attendance</h3>
@@ -356,7 +361,10 @@
       <!-- Inventory -->
       <div class="bg-white border border-[#e5e7eb] rounded-[16px] overflow-hidden flex flex-col">
         <div class="h-[148px] overflow-hidden">
-          <img src="./inventory.jpg" alt="Warehouse inventory" class="w-full h-full object-cover object-top"/>
+          <picture>
+            <source srcset="./inventory.webp" type="image/webp">
+            <img src="./inventory-opt.jpg" alt="Warehouse inventory" class="w-full h-full object-cover object-top" loading="lazy" decoding="async">
+          </picture>
         </div>
         <div class="p-6 flex flex-col gap-3">
           <h3 class="text-[18px] font-bold text-[#111827] tracking-[-0.18px]">Inventory</h3>
@@ -367,7 +375,7 @@
       <!-- Accounts -->
       <div class="bg-white border border-[#e5e7eb] rounded-[16px] overflow-hidden flex flex-col">
         <div class="h-[148px] overflow-hidden">
-          <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&h=296&q=80" alt="Financial data" class="w-full h-full object-cover"/>
+          <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&h=296&q=75&fm=webp" alt="Financial data" class="w-full h-full object-cover" loading="lazy" decoding="async"/>
         </div>
         <div class="p-6 flex flex-col gap-3">
           <h3 class="text-[18px] font-bold text-[#111827] tracking-[-0.18px]">Accounts</h3>
