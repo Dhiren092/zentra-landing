@@ -405,7 +405,7 @@
     <div class="flex gap-2 mb-10 flex-wrap">
       <button onclick="showTab('retail')"    class="tab-btn active text-[11px] font-bold uppercase tracking-[0.66px] h-[24px] px-3 rounded-full transition-all" id="tab-retail">Retail</button>
       <button onclick="showTab('fnb')"       class="tab-btn         text-[11px] font-bold uppercase tracking-[0.66px] h-[24px] px-3 rounded-full transition-all" id="tab-fnb">Food &amp; Beverage</button>
-      <button onclick="showTab('salon')"     class="tab-btn         text-[11px] font-bold uppercase tracking-[0.66px] h-[24px] px-3 rounded-full transition-all" id="tab-salon">Salon &amp; Services</button>
+      <button onclick="showTab('salon')"     class="tab-btn         text-[11px] font-bold uppercase tracking-[0.66px] h-[24px] px-3 rounded-full transition-all" id="tab-salon">Payroll &amp; HR</button>
     </div>
 
     <!-- ── Retail tab ── -->
@@ -514,53 +514,53 @@
       </div>
     </div>
 
-    <!-- ── Salon tab ── -->
+    <!-- ── Payroll & HR tab ── -->
     <div class="tab-panel" id="panel-salon">
       <div class="border-t border-[#e5e7eb] pt-10 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
         <div>
           <h3 class="font-bold text-[#111827] mb-4" style="font-size:clamp(22px,2.5vw,32px);line-height:1.15;letter-spacing:-0.64px">
-            Every appointment turns into a paid invoice.
+            Pay your staff right, every time.
           </h3>
           <p class="text-[16px] text-[#4b5563] leading-[26px] mb-7">
-            Bookings, reminders, payments and staff commissions in one flow. No chasing. No double-booking. No end-of-week drama.
+            Calculate wages, track shifts, and export payslips in minutes. NPF, NSA and PAYE computed automatically — no spreadsheets, no mistakes.
           </p>
           <ul class="flex flex-col gap-4">
             <li class="flex items-start gap-3 text-[14px] text-[#374151]">
               <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" fill="#4f46e5" opacity=".12"/><path d="M5 8l2 2 4-4" stroke="#4f46e5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              Online booking with SMS and WhatsApp reminders
+              Payroll with NPF, NSA &amp; Tax calculated automatically
             </li>
             <li class="flex items-start gap-3 text-[14px] text-[#374151]">
               <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" fill="#4f46e5" opacity=".12"/><path d="M5 8l2 2 4-4" stroke="#4f46e5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              Per-stylist commission, calculated automatically
+              Fingerprint attendance &amp; shift tracking
             </li>
             <li class="flex items-start gap-3 text-[14px] text-[#374151]">
               <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" fill="#4f46e5" opacity=".12"/><path d="M5 8l2 2 4-4" stroke="#4f46e5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              Customer history visible the moment they walk in
+              Leave requests, departments and employee profiles
             </li>
           </ul>
         </div>
         <!-- UI mockup -->
         <div class="bg-white border border-[#e5e7eb] rounded-[14px] ui-shadow overflow-hidden">
           <div class="border-b border-[#f3f4f6] px-5 py-4">
-            <p class="text-[14px] font-bold text-[#111827]">Today's bookings · Lumière Salon</p>
-            <p class="text-[12px] text-[#6b7280]">6 appointments · 3 stylists</p>
+            <p class="text-[14px] font-bold text-[#111827]">May 2026 Payroll · 8 employees</p>
+            <p class="text-[12px] text-[#6b7280]">NPF &amp; Tax computed · Export ready</p>
           </div>
           <div class="divide-y divide-[#f3f4f6]">
             <div class="px-5 py-3 flex items-center justify-between">
-              <div><p class="text-[13px] font-semibold text-[#111827]">Priya Ramjee — Cut &amp; Colour</p><p class="text-[12px] text-[#6b7280]">10:00 · Sandrine</p></div>
-              <span class="text-[11px] font-bold text-[#166534] bg-[#f0fdf4] px-2 py-1 rounded-full">Confirmed</span>
+              <div><p class="text-[13px] font-semibold text-[#111827]">Alex Morgan</p><p class="text-[12px] text-[#6b7280]">Cashier · 22 days</p></div>
+              <div class="text-right"><p class="text-[13px] font-semibold text-[#111827]">Rs 18,500</p><span class="text-[11px] font-bold text-[#166534] bg-[#f0fdf4] px-2 py-0.5 rounded-full">Paid</span></div>
             </div>
             <div class="px-5 py-3 flex items-center justify-between">
-              <div><p class="text-[13px] font-semibold text-[#111827]">Marc Lebrasse — Blowdry</p><p class="text-[12px] text-[#6b7280]">11:30 · Camille</p></div>
-              <span class="text-[11px] font-bold text-[#92400e] bg-[#fff7ed] px-2 py-1 rounded-full">In progress</span>
+              <div><p class="text-[13px] font-semibold text-[#111827]">Sandra Foo</p><p class="text-[12px] text-[#6b7280]">Manager · 22 days</p></div>
+              <div class="text-right"><p class="text-[13px] font-semibold text-[#111827]">Rs 22,000</p><span class="text-[11px] font-bold text-[#92400e] bg-[#fff7ed] px-2 py-0.5 rounded-full">Processing</span></div>
             </div>
             <div class="px-5 py-3 flex items-center justify-between">
-              <div><p class="text-[13px] font-semibold text-[#111827]">Sophie Ng — Highlights</p><p class="text-[12px] text-[#6b7280]">14:00 · Sandrine</p></div>
-              <span class="text-[11px] font-bold text-[#6b7280] bg-[#f3f4f6] px-2 py-1 rounded-full">Pending</span>
+              <div><p class="text-[13px] font-semibold text-[#111827]">Raj Bissoo</p><p class="text-[12px] text-[#6b7280]">Stock · 20 days</p></div>
+              <div class="text-right"><p class="text-[13px] font-semibold text-[#111827]">Rs 15,750</p><span class="text-[11px] font-bold text-[#6b7280] bg-[#f3f4f6] px-2 py-0.5 rounded-full">Pending</span></div>
             </div>
           </div>
           <div class="bg-[#fafafa] border-t border-[#f3f4f6] px-5 py-3">
-            <p class="text-[12px] text-[#6b7280]">Auto SMS reminders sent the evening before. Cancellations re-open the slot in real time.</p>
+            <p class="text-[12px] text-[#6b7280]">NPF &amp; Tax deductions applied. Export all payslips to CSV in one click.</p>
           </div>
         </div>
       </div>
